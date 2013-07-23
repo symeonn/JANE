@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<faces-config
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
+    version="2.0">
+
+<application>
+		<!-- FACELETS -->
+		<view-handler>com.sun.facelets.FaceletViewHandler</view-handler>
+		<!-- END OF: FACELETS -->
+		<locale-config>
+			<default-locale>pl</default-locale>
+		</locale-config>
+
+		
+
+
+
+		<message-bundle>i18n.application</message-bundle>	
+		<resource-bundle>
+			<base-name>i18n.application</base-name>
+			<var>sok_bundle</var>
+		</resource-bundle>
+
+<!-- 		<message-bundle>pl.archidoc.indo.i18n.log_messages</message-bundle>	 -->
+<!-- 		<resource-bundle> -->
+<!-- 			<base-name>pl.archidoc.indo.i18n.log_messages</base-name> -->
+<!-- 			<var>log_res</var> -->
+<!-- 		</resource-bundle> -->
+
+	
+
+
+		<!--
+			aby beany Springowe można było używać (wstrzykiwać) w kontekście
+			aplikacji JSF (np. w managed beanach). Ten konkretny resolver działa
+			na tej zasadzie, że poszukuje beanów(do ktorych z widokow odwolujemy
+			sie poprzez #{}) w kontekście Springa, a jeżeli ich nie znajdzie,
+			wówczas poszukuje ich w kontekście JSF.
+		-->
+		<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
+
+	</application>
+	
+</faces-config>
