@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich" xml:lang="en" lang="en">
+
+
+<head>
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+		PreventCopyPaste(".nocb");
+		HandleMasking();
+	});
+</script>
+
+</head>
+
+
+<body>
+
+	<h:form>
+
+		<ui:param name="controller" value="#{startController}"></ui:param>
+
+		<div class="action_header">
+
+			<h:outputText value="#{controller.nazwaAplikacji}" />
+			<br /> &nbsp;
+			<h:outputText value="#{sok_bundle.sok_welcome}" />
+		</div>
+
+		<h:inputText id="commandInput" value="#{controller.userSentence}" />
+		<h:commandButton id="kuku" value="cl"
+			actionListener="#{controller.clTest}" immediate="false" />
+
+		<h:commandButton id="kuku2" value="mySql" immediate="false"
+			action="#{controller.clTestNoEvent}" />
+
+		<h:commandButton id="button1" value="import z pliku" immediate="false"
+			action="#{controller.button1}" rendered="false" />
+
+		<h:commandButton id="button2" value="wyslij mail" immediate="false"
+			action="#{controller.sendMail}" rendered="false" />
+
+
+		<br />
+		<h:selectBooleanCheckbox id="showImportedValuesSelect" title="boT"
+			value="true">
+			<a4j:support event="onchange" ajaxSingle="true"
+				reRender="exportsTablePanel" limitToList="true" />
+		</h:selectBooleanCheckbox>
+		<br />
+
+		<h:outputText id="testowy" value="#{controller.tekst}">
+		</h:outputText>
+
+		<br />
+		<br />
+		<br />
+
+<!-- 		<rich:comboBox id="dictValue" width="300" immediate="false" -->
+<!-- 			value="#{controller.state}" -->
+<!-- 			valueChangeListener="#{controller.valueChanged}"> -->
+<!-- 			<a4j:support event="onkeyup"  -->
+<!-- 				reRender="#{controller.toRender}" ajaxSingle="true" -->
+<!-- 				immediate="false" -->
+<!-- 				limitToList="true" /> -->
+<!-- 			<f:selectItems id="si" value="#{controller.dictionaryItems}" /> -->
+
+
+<!-- 		</rich:comboBox> -->
+<!-- 		<br /> -->
+<!-- 		<br /> -->
+
+
+<!-- 		<h:outputText id="comboSize" value="#{controller.comboSize}" /> -->
+<!-- 		<br /> -->
+<!-- 		<br /> -->
+<!-- 		<h:outputText id="stateSize" value="#{controller.state}" /> -->
+
+
+
+<!-- 		<h:inputText id="city" value="#{controller.capital}" /> -->
+<!-- 		<rich:suggestionbox id="cir" for="city" var="result" -->
+<!-- 			suggestionAction="#{controller.autocomplete}" -->
+<!-- 			selfRendered="true" -->
+<!-- 			usingSuggestObjects="true" limitToList="true" shadowDepth="0" -->
+<!-- 					ignoreDupResponses="true" shadowOpacity="0" -->
+<!-- 				selectedClass="ajaxComboBoxListSelected" -->
+<!-- 				popupClass="ajaxComboBoxList"	 -->
+<!-- 			> -->
+<!-- 			<h:column> -->
+<!-- 				<h:outputText value="#{result}" /> -->
+<!-- 			</h:column> -->
+<!-- 		</rich:suggestionbox> -->
+
+
+
+	</h:form>
+</body>
+
+</html>

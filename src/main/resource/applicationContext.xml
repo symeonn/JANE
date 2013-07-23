@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:faces="http://www.springframework.org/schema/faces"
+	xmlns:int-security="http://www.springframework.org/schema/integration/security"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:sec="http://www.springframework.org/schema/security"
+	xmlns:ehcache="http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring"
+	xsi:schemaLocation="http://www.springframework.org/schema/integration/security http://www.springframework.org/schema/integration/security/spring-integration-security-3.0.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+	http://www.springframework.org/schema/security http://www.springframework.org/schema/security/springsecurity-3.0.xsd
+	http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/faces http://www.springframework.org/schema/faces/spring-faces-2.0.xsd
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring/ehcache-spring-1.1.xsd">
+
+	<!-- Skanowanie wszystkich podpakietow z tego pakietu na obecność specyficznych
+		adnotacji frameworka -->
+	<context:component-scan base-package="pl" />
+	<context:annotation-config />
+	
+<aop:aspectj-autoproxy proxy-target-class="true" />
+	
+<!-- Pula polaczen zajmie sie kontener aplikacyjny. Wyszukuje nasze połączenie
+		(skonfigurowane w serwerze) i binduje je do nazwy dataSource -->
+	<bean id="janeDataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName" value="java:comp/env/jdbc/jane" />
+	</bean>
+
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="janeDataSource" />
+	</bean>
+
+<!-- 	<bean id="logDataSource" class="org.springframework.jndi.JndiObjectFactoryBean"> -->
+<!-- 		<property name="jndiName" value="java:comp/env/jdbc/indo-log" /> -->
+<!-- 	</bean> -->
+
+<!-- 	<bean id="logJdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate"> -->
+<!-- 		<property name="dataSource" ref="logDataSource" /> -->
+<!-- 	</bean> -->
+
+	<!-- Manager transakcji. Wykorzystujemy implementacje Hibernate wiec zamiast
+		entityManagerFactory korzystamy z sessionFactory. -->
+	<bean name="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="janeDataSource" />
+	</bean>
+
+	<!-- Dzięki temu zapisowi możemy używać dodatkowych adnotacji (np. @Transactional) -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+	<!-- i18n resources -->
+<!-- 	<bean id="logMessagesSource" -->
+<!-- 		class="org.springframework.context.support.ResourceBundleMessageSource"> -->
+<!-- 		<property name="basename" value="pl.archidoc.indo.i18n.log_messages" /> -->
+<!-- 	</bean> -->
+	
+
+ 	<bean id="testThreads" class="pl.byMarioUltimate.StartClazzTwo"  /> 
+
+
+
+</beans>

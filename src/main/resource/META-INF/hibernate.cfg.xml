@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	<session-factory>
+
+		<!-- jaki jezyk zapytań będzie wykorzystywany -->
+		<property name="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</property>
+
+		<!-- pokazuje zapytania sql jakie wykonuje hibernate  -->
+		<property name="hibernate.show_sql">true</property>
+
+		<!-- formatuje w/w zapytania -->
+		<property name="hibernate.format_sql">true</property>
+
+		<!--
+			dodatkowe komentarze, pomagają zorientować się jakie zapytanie
+			aktualnie jest wykonywane
+		-->
+		<property name="use_sql_comments">true</property>
+
+		<!-- Bind the getCurrentSession() method to the thread. -->
+		<!--
+			<property name="current_session_context_class">thread</property>
+		-->
+
+		<!--
+			automatycznie aktualizuj schemat bazy danych na podstawie class encji
+			validate - validate the schema, makes no changes to the database;
+			update - update the schema;
+			create - creates the schema, destroying previous data; 
+			create-drop - drop the schema at the end of the session.
+		-->
+		<!-- <property name="hibernate.hbm2ddl.auto">update</property>  -->
+
+
+	</session-factory>
+</hibernate-configuration>

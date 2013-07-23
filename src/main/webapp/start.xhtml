@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich" xml:lang="en" lang="en">
+<script type="text/javascript"
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript"
+	src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+<style type="text/css">
+</style>
+<head>
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+
+
+
+</head>
+
+
+<body>
+
+	<h:form>
+
+		<ui:param name="controller" value="#{pl.byMario.controller.StartController}"></ui:param>
+
+		<h:panelGroup style="background: #7D7A7B; opacity:0.4; ">
+
+			<a4j:commandButton id="ticTacToe" value="xOx" immediate="false"
+				rendered="true">
+
+			</a4j:commandButton>
+
+
+		</h:panelGroup>
+
+
+		<div class="action_header">
+
+			<h:outputText value="#{controller.nazwaAplikacji}" />
+			<br /> &nbsp;
+			<h:outputText value="#{sok_bundle.sok_welcome}" />
+		</div>
+
+		<h:inputText id="commandInput" value="#{controller.userSentence}" />
+		<h:commandButton id="kuku" value="cl"
+			actionListener="#{controller.clTest}" immediate="false" />
+
+		<h:commandButton id="kuku2" value="mySql" immediate="false"
+			action="#{controller.clTestNoEvent}" />
+
+		<h:commandButton id="button1" value="import z pliku" immediate="false"
+			action="#{controller.button1}" rendered="false" />
+
+		<h:commandButton id="button2" value="wyslij mail" immediate="false"
+			action="#{controller.sendMail}" rendered="false" />
+
+		<a4j:commandButton id="neuralNet" value="seic" immediate="false"
+			rendered="true">
+			<a4j:actionparam actionListener="#{controller.testNet2}" name="arg"
+				noEscape="true" value="getTexxxt()" assignTo="#{controller.texxxt}"
+				immediate="true" />
+		</a4j:commandButton>
+
+
+		<br />
+		<h:selectBooleanCheckbox id="showImportedValuesSelect" title="boT"
+			value="true">
+			<a4j:support event="onchange" ajaxSingle="true"
+				reRender="exportsTablePanel" limitToList="true" />
+		</h:selectBooleanCheckbox>
+		<br />
+
+
+
+		<br />
+		<br />
+		<br />
+
+		<h:panelGroup id="tttField">
+
+			<a4j:commandButton id="setMove" value="move" immediate="true"
+				rendered="true" reRender="testowy" limitToList="true">
+				<a4j:actionparam actionListener="#{controller.makeMove}" name="arg"
+					noEscape="true" value="getTexxxt()" assignTo="#{controller.texxxt}"
+					immediate="true" />
+			</a4j:commandButton>
+
+			<table border="1">
+				<tr>
+					<td id="11"></td>
+					<td id="12"></td>
+					<td id="13"></td>
+					<td id="14"></td>
+				</tr>
+				<tr>
+					<td id="21"></td>
+					<td id="22"></td>
+					<td id="23"></td>
+					<td id="24"></td>
+				</tr>
+				<tr>
+					<td id="31"></td>
+					<td id="32"></td>
+					<td id="33"></td>
+					<td id="34"></td>
+				</tr>
+				<tr>
+					<td id="41"></td>
+					<td id="42"></td>
+					<td id="43"></td>
+					<td id="44"></td>
+				</tr>
+
+			</table>
+
+		</h:panelGroup>
+
+
+		<a4j:commandButton id="getPatern" value="get patern" immediate="true"
+			rendered="true" reRender="testowy" limitToList="true">
+			<a4j:actionparam actionListener="#{controller.makePatern}" name="arg"
+				noEscape="true" value="getTexxxt()" assignTo="#{controller.texxxt}"
+				immediate="true" />
+		</a4j:commandButton>
+
+		<a4j:commandButton id="getNet" value="init network" immediate="true"
+			rendered="true" reRender="testowy" limitToList="true">
+			<a4j:actionparam actionListener="#{controller.initNetwork}"
+				name="arg" noEscape="true" value="getTexxxt()"
+				assignTo="#{controller.texxxt}" immediate="true" />
+		</a4j:commandButton>
+
+		<a4j:commandButton id="learnNet" value="start learning"
+			immediate="true" rendered="true" reRender="" limitToList="true"
+			actionListener="#{controller.learning}">
+
+		</a4j:commandButton>
+		
+		<a4j:commandButton id="processNet" value="process"
+			immediate="true" rendered="true" reRender="" limitToList="true"
+			actionListener="#{controller.process}">
+
+		</a4j:commandButton>
+
+
+
+
+
+
+
+	</h:form>
+	<h:outputText id="testowy" value="#{controller.tekst}">
+	</h:outputText>
+	<hr />
+	<hr />
+	<hr />
+
+
+	<rich:dataTable id="parametryTable" var="day"
+		value="#{controller.daysEnabledList}">
+
+		<rich:column width="400px;">
+			<f:facet name="header">dzien</f:facet>
+			<h:outputLabel value="#{day}" />
+			<h:selectBooleanCheckbox value="#{controller.daysEnabled[day]}"
+				escape="true" styleClass="configParamsPanelLabel" />
+		</rich:column>
+
+		<rich:column width="20px;">
+			<f:facet name="header">godzina</f:facet>
+
+			<h:selectOneMenu value="#{controller.daysWithHours[day][0]}">
+				<f:selectItems value="#{controller.hours}" />
+			</h:selectOneMenu>
+			<h:selectOneMenu value="#{controller.daysWithHours[day][1]}">
+				<f:selectItems value="#{controller.hours}" />
+			</h:selectOneMenu>
+			<h:selectOneMenu value="#{controller.daysWithHours[day][2]}">
+				<f:selectItems value="#{controller.hours}" />
+			</h:selectOneMenu>
+
+
+
+		</rich:column>
+
+	</rich:dataTable>
+
+<h:panelGroup id="kkk" layout="block" >
+
+	<ui:repeat var="day" value="#{controller.daysEnabledList}">
+	
+
+		<h:panelGroup id="eee" style="display: inline-table;border: 1px solid #7F9DB9;">
+		
+			<h:outputLabel value="#{day}" />
+			<h:selectBooleanCheckbox value="#{controller.daysEnabled[day]}"
+				escape="false"  />
+
+<br/>
+			<h:selectOneMenu id="sel1" styleClass="selMoje" value="#{controller.daysWithHours[day][0]}" >
+				<f:selectItems value="#{controller.hours}" />
+			</h:selectOneMenu>
+			<h:selectOneMenu id="sel2" styleClass="selMoje" value="#{controller.daysWithHours[day][1]}" >
+				<f:selectItems value="#{controller.hours}" />
+			</h:selectOneMenu>
+			<h:selectOneMenu id="sel3" styleClass="selMoje" value="#{controller.daysWithHours[day][2]}" >
+				<f:selectItems value="#{controller.hours}" />
+			</h:selectOneMenu>
+		</h:panelGroup>
+			
+		
+	</ui:repeat>
+</h:panelGroup>
+	<script type="text/javascript">
+		var texxxt;
+
+		function getTexxxt() {
+			// 		document.getElementById("testowy").innerHTML  = texxxt;
+			return texxxt;
+		}
+		// 			$('#getGray').click(function(){
+		function showG() {
+			texxxt = " ";
+			$('td').each(function() {
+				texxxt += $(this).attr("class") + ",";
+			});
+			// 			alert(texxxt);
+		};
+
+		$('td').click(function() {
+			// 			var id = $(this).attr('id');
+
+			// 			alert(id);
+			$(this).toggleClass("gray");
+
+			// 			document.getElementById('commandInput').value = texxxt;
+			// 			$('commandInput').value = texxxt;
+
+			showG();
+
+		});
+	</script>
+
+
+</body>
+
+</html>
