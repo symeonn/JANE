@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich" xml:lang="en" lang="en">
+<script type="text/javascript"
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript"
+	src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+<style type="text/css">
+</style>
+<head>
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+	<h:form>
+
+		<ui:param name="controller" value="#{startController}"></ui:param>
+
+		<div class="action_header">
+
+			<h:outputText id="userText" value="#{sok_bundle.sok_welcome}" />
+		</div>
+
+		<h:inputText id="commandInput" value="#{controller.userSentence}" />
+
+		<a4j:commandButton id="talk" value="TALK!" immediate="false"
+			rendered="true" reRender="janeText, neuronsCount" limitToList="true"
+			actionListener="#{controller.processUserSentence}" />
+		<a4j:commandButton id="learn" value="LEARN" immediate="false"
+			rendered="true" reRender="janeText, neuronsCount" limitToList="true"
+			actionListener="#{controller.learn}" />
+		<a4j:commandButton id="check" value="CHECK" immediate="false"
+			rendered="true" reRender="janeText, neuronsCount" limitToList="true"
+			actionListener="#{controller.check}" />
+<h:inputText id="inputOne" value="#{controller.one}" />
+<h:inputText id="inputTwo" value="#{controller.two}" />
+
+		<br />
+		<br />
+		<br />
+		<br />
+
+		<h:commandButton id="initNet" value="init net" immediate="false"
+			action="#{controller.initNet}" rendered="true" />
+
+		<a4j:commandButton id="learnNet" value="learning" immediate="true"
+			rendered="true" reRender="" limitToList="true"
+			actionListener="#{controller.learning}">
+
+		</a4j:commandButton>
+
+		<a4j:commandButton id="processNet" value="process net"
+			immediate="true" rendered="true" reRender="" limitToList="true"
+			actionListener="#{controller.process}">
+
+		</a4j:commandButton>
+		
+		<h:commandButton id="initDummyNet" value="dummy" immediate="false"
+		action="#{controller.startDummyNet}" rendered="true" />
+		
+	</h:form>
+
+	<h:outputText id="neuronsCount" value="#{controller.neuronCount}" />
+	<hr />
+	<hr />
+	<hr />
+
+
+	
+
+
+	<h:outputText id="janeText" value="#{controller.janeSentence}" />
+
+	<script type="text/javascript">
+		var texxxt;
+
+		function getTexxxt() {
+			// 		document.getElementById("testowy").innerHTML  = texxxt;
+			return texxxt;
+		}
+		// 			$('#getGray').click(function(){
+		function showG() {
+			texxxt = " ";
+			$('td').each(function() {
+				texxxt += $(this).attr("class") + ",";
+			});
+			// 			alert(texxxt);
+		};
+
+		$('td').click(function() {
+			// 			var id = $(this).attr('id');
+
+			// 			alert(id);
+			$(this).toggleClass("gray");
+
+			// 			document.getElementById('commandInput').value = texxxt;
+			// 			$('commandInput').value = texxxt;
+
+			showG();
+
+		});
+	</script>
+
+
+</body>
+
+</html>
