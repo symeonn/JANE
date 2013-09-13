@@ -58,7 +58,7 @@
 <!-- 	</bean> -->
 	
 
- 	<bean id="testThreads" class="pl.byMarioUltimate.StartClazzTwo"  /> 
+<!--  	<bean id="testThreads" class="pl.byMarioUltimate.StartClazz"  />  -->
 
 
 

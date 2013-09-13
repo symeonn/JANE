@@ -1,5 +1,8 @@
 package pl.byMarioUltimate;
 
+import java.lang.management.ManagementFactory;
+import java.lang.management.OperatingSystemMXBean;
+
 import org.apache.log4j.Logger;
 
 import pl.byMarioUltimate.service.NeuralNetService;
@@ -10,22 +13,72 @@ public class Main {
 
 	public static void main(String[] argv) {
 
-//		NeuralNetService neuralNetService = new NeuralNetService();
-//		neuralNetService.initRawNet();
-//		neuralNetService.updateNet("one two three");
-//		neuralNetService.updateNet("three four");
-//		neuralNetService.updateNet("one five");
-//		
-//		System.out.println("koniec MAIN");
 		
-		StartClazzTwo cc = new StartClazzTwo();
-		int i =0;
-//		while(i<1000000){
-			cc.trainNet();
-			System.out.println(i);
-			i++;
-//		}
+
+		
+//		Double sigmoidalDerivative = NeuralNetwork.sigmoidalDerivative(-0.53);
+
+		// NeuralNetService neuralNetService = new NeuralNetService();
+		// neuralNetService.initRawNet();
+		// neuralNetService.updateNet("one two three");
+		// neuralNetService.updateNet("three four");
+		// neuralNetService.updateNet("one five");
+		//
+		// System.out.println("koniec MAIN");
+
+		// create working set, iterate it and sum and check error
+		NeuralNetwork cc = new NeuralNetwork(2, 8, 1);
+
+		Double[][] input = new Double[4][2];
+		Double[][] idealOutput = new Double[4][1];
+
+		input[0][0] = 0.0;
+		input[0][1] = 1.0;
+		idealOutput[0][0] = 1.0;
+
+		input[1][0] = 0.0;
+		input[1][1] = 0.0;
+		idealOutput[1][0] = 0.0;
+
+		input[2][0] = 1.0;
+		input[2][1] = 0.0;
+		idealOutput[2][0] = 1.0;
+
+		input[3][0] = 1.0;
+		input[3][1] = 1.0;
+		idealOutput[3][0] = 0.0;
+
+		Double error = 0.0;
+		int i = 0;
+		try {
+			do {
+				error = 0.0;
+
+				for(int j = 0; j < idealOutput.length; j++) {
+
+					error += cc.trainNet(input[j], idealOutput[j]);
+					// if(j==2) break; // for only one training set
+				}
+				cc.rPropWeights(0);
+				// error is calculated by MSE
+				error = error / idealOutput.length;
+				if(i % 10 == 0) {
+//					System.out.println(i + " e:" + error);
+					// System.out.println(i + " o:"+cc.getNetworkOutput()[0]);
+				}
+				i++;
+			}
+			// if i hits max 
+			// reset net or run genetic algorythm or smth
+			while(i < 100000 && error > 0.002);
+
+			System.out.println("FINAL " + i + " e:" + error);
+
+		}
+		catch(Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
-
 }

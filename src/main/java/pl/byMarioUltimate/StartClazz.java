@@ -23,7 +23,7 @@ public class StartClazz{
 //		for(int i = 0; i < 2; i++) {
 			
 //		(new Thread(this)).start();
-			t= new Thread(new StartClazzTwo());
+			t= new Thread(new NeuralNetwork(2,2,1));
 			t.setName("NET");
 //			tl.add(t);
 			
@@ -36,10 +36,10 @@ public class StartClazz{
 //		}
 		
 		t.start();
-//		while (t.isAlive()){
-//			t.run();
-//			
-//		}
+		while (t.isAlive()){
+			t.run();
+			
+		}
 		
 
 	}
