@@ -831,4 +831,8 @@ public class NeuralNetwork implements Runnable {
 
 		return output;
 	}
+	
+	private void testMethod(){
+		
+	}
 }
