@@ -344,15 +344,18 @@ public class NeuralNetwork implements Runnable {
 		for(int layerFrom = 0; layerFrom < layersCount - 1; layerFrom++) {
 
 			int layerTo = layerFrom + 1;
-
+			
+			// take nodeTo
 			for(int nodeTo = 0; nodeTo < layersNodesProps[layerTo].length; nodeTo++) {
 
 				if(!(layerTo < layersCount - 1 && nodeTo == layersNodesProps[layerTo].length - 1)) {
 
 					Double sum = 0d;
-
+					// and take nodeFrom
 					for(int nodeFrom = 0; nodeFrom < layersNodesProps[layerFrom].length; nodeFrom++) {
 
+						// and setip initial connection properties
+						
 						// initial weight setup
 						if(connProps[layerTo][nodeFrom][nodeTo][0] == null) {
 							connProps[layerTo][nodeFrom][nodeTo][0] = getRandomDouble();
