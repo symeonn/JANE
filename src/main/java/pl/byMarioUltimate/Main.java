@@ -1,11 +1,6 @@
 package pl.byMarioUltimate;
 
-import java.lang.management.ManagementFactory;
-import java.lang.management.OperatingSystemMXBean;
-
 import org.apache.log4j.Logger;
-
-import pl.byMarioUltimate.service.NeuralNetService;
 
 public class Main {
 
@@ -13,7 +8,7 @@ public class Main {
 
 	public static void main(String[] argv) {
 
-		
+//		test();
 
 		
 //		Double sigmoidalDerivative = NeuralNetwork.sigmoidalDerivative(-0.53);
@@ -27,7 +22,7 @@ public class Main {
 		// System.out.println("koniec MAIN");
 
 		// create working set, iterate it and sum and check error
-		NeuralNetwork cc = new NeuralNetwork(2, 8, 1);
+		NeuralNetwork neuralNetwork = new NeuralNetwork(2, 4, 1);
 
 		Double[][] input = new Double[4][2];
 		Double[][] idealOutput = new Double[4][1];
@@ -56,10 +51,10 @@ public class Main {
 
 				for(int j = 0; j < idealOutput.length; j++) {
 
-					error += cc.trainNet(input[j], idealOutput[j]);
+					error += neuralNetwork.trainNet(input[j], idealOutput[j]);
 					// if(j==2) break; // for only one training set
 				}
-				cc.rPropWeights(0);
+				neuralNetwork.rPropWeights(0);
 				// error is calculated by MSE
 				error = error / idealOutput.length;
 				if(i % 10 == 0) {
@@ -80,5 +75,57 @@ public class Main {
 			e.printStackTrace();
 		}
 
+	}
+
+	/**
+	 * 
+	 * @author Mariusz Lewandowski; byMario.pl
+	 */
+	private static void test() {
+		short s = (short)5;
+		
+		System.out.println(s);
+//		Integer i = new Integer(5);
+//		
+//		switch(i) {
+//		case 1:
+//System.out.println("1");
+//
+//		case 2:
+//System.out.println("2");
+//
+//			
+//		default:
+//			System.out.println("default");
+//		case 5:
+//			System.out.println("5");
+//		case 4:
+//			System.out.println("4");
+//			
+//		}
+		
+		
+		Byte i = -8;
+		System.out.println(i);
+		System.out.println(Integer.toBinaryString(i));
+		
+		System.out.println((i>>1));
+		System.out.println(Integer.toBinaryString(i>>1));
+		System.out.println((i<<1));
+		System.out.println(Integer.toBinaryString(i<<1));
+		System.out.println((i>>>1));
+		System.out.println(Integer.toBinaryString(i>>>1));
+		
+		
+		
+//		double d = -3.5;
+//		System.out.println(Math.ceil(d));
+//		System.out.println(Math.floor(d));
+//		System.out.println(Math.round(d));
+		
+		
+		
+		System.exit(0);
+		
 	}
 }

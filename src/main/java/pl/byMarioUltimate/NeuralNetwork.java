@@ -43,6 +43,8 @@ public class NeuralNetwork implements Runnable {
 
 	/**
 	 * <pre>
+	 * properties of nodes
+	 * 
 	 * [layer]
 	 * [node number]
 	 * [inputValues*weights sum, outputValue, nodeDelta]
@@ -56,6 +58,8 @@ public class NeuralNetwork implements Runnable {
 
 	/**
 	 * <pre>
+	 * properties of connections between nodes
+	 * 
 	 * [layer TO connection props]
 	 * [node FROM - connection FROM node]
 	 * [node TO - connection TO node]
@@ -157,10 +161,8 @@ public class NeuralNetwork implements Runnable {
 	 * @param layersCount
 	 */
 	public NeuralNetwork(int... neuronInLayers) {
-		super();
-
 		buildNetworkStructure(neuronInLayers);
-		initNodesConnectionsPropsArray();
+		buildNodesConnectionsPropsArray();
 		init();
 	}
 
@@ -178,7 +180,7 @@ public class NeuralNetwork implements Runnable {
 	 * 
 	 * @author Mariusz Lewandowski; byMario
 	 */
-	private void initNodesConnectionsPropsArray() {
+	private void buildNodesConnectionsPropsArray() {
 
 		connProps = new Double[layersCount][][][];
 		prevConnProps = new Double[layersCount][][][];
@@ -381,13 +383,13 @@ public class NeuralNetwork implements Runnable {
 		// init();
 		// setInputValues(null, null);
 
-		Integer iteration = 0;
+//		Integer iteration = 0;
 
-		Double[] output;
+//		Double[] output;
 		// System.out.println("************************");
 		// System.out.println("backProp");
 		// System.out.println("************************");
-		Double error = 0.0;
+//		Double error = 0.0;
 		// do {
 		// iteration++;
 		// System.out.println("Iteration " + iteration);
@@ -554,6 +556,10 @@ public class NeuralNetwork implements Runnable {
 		return error;
 	}
 
+	/**
+	 * @param e
+	 * @author Mariusz Lewandowski; byMario.pl
+	 */
 	public void rPropWeights(int e) {
 
 		for(int layerTo = layersCount - 1; layerTo > 0; layerTo--) {
